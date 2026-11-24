@@ -1,0 +1,43 @@
+body { font-family: "Segoe UI", Arial, sans-serif; background:#eef2f7; color:#1a202c;
+       margin:0; padding:24px; }
+
+h1 { font-size:26px; margin:0 0 4px 0; }
+
+h3 { font-size:19px; margin:0 0 8px 0; }
+
+.bereich { background:#ffffff; border:1px solid #d7dee8; border-radius:8px;
+           padding:16px 18px; margin-bottom:18px; }
+
+.flex { display:flex; flex-wrap:wrap; gap:24px; align-items:flex-start; }
+
+.szene { flex:0 0 700px; max-width:100%; }
+
+canvas { border:1px solid #b9c4d0; border-radius:4px; background:#f2f2f2; }
+
+#info { flex:1 1 340px; min-width:320px; max-width:560px; }
+
+#info p { line-height:1.45; margin:10px 0; }
+
+.formel { font-family:Consolas, "Courier New", monospace; font-size:15px;
+          background:#f5f8fc; border-left:4px solid #2b6cb0; padding:10px 12px; }
+
+.knopf { display:inline-block; margin:4px 4px 4px 0; padding:8px 12px; border:0;
+         border-radius:5px; background:#4a5568; color:#dbe4ee; font-size:14px;
+         cursor:pointer; }
+
+.knopf:hover { background:#2b6cb0; color:#fff; }
+
+.gruppe { margin-bottom:8px; }
+
+.label { display:inline-block; width:110px; color:#4a5568; font-size:13px; }
+.klein { font-size:13px; color:#4a5568; }
+
+/* 3D-Ansicht */
+#canvas { display:block; width:500px; max-width:100%; aspect-ratio:1 / 1; }
+
+.knopf:disabled { background:#b6c1cd; color:#f2f5f8; cursor:default; }
+.knopf:disabled:hover { background:#b6c1cd; color:#f2f5f8; }
+
+.notice { margin-top:12px; padding:10px 12px; font-size:14px;
+          background:#fdf4f4; border:1px solid #e4c3c3; border-left:4px solid #c53030;
+          border-radius:4px; color:#7b1d1d; }

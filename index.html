@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GVT-EA6---Objekte-bewegen---Fabian-Meintzer</title>
+
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+
+<script src="ext/gl-matrix.js"></script>
+<script src="js/vertexDataPlane.js"></script>
+<script src="js/vertexDataTorus.js"></script>
+<script src="js/vertexDataSphere.js"></script>
+<script src="js/app.js"></script>
+
+<script type="x-shader/x-vertex" id="vertexshader">
+  attribute vec3 aPosition;
+  attribute vec3 aNormal;
+
+  uniform mat4 uPMatrix;
+  uniform mat4 uMVMatrix;
+  uniform mat3 uNMatrix;
+  uniform vec4 uColor;
+
+  varying vec4 vColor;
+
+  void main() {
+    gl_Position = uPMatrix * uMVMatrix * vec4(aPosition, 1.0);
+
+    vec3 tNormal = uNMatrix * aNormal;
+    float len = length(tNormal);
+    if (len > 0.0) {
+      tNormal = tNormal / len;
+    }
+
+    vColor = vec4(tNormal.z, tNormal.z, tNormal.z, 1.0);
+    vColor = uColor * (vColor + 1.0) / 2.0;
+  }
+</script>
+
+<script type="x-shader/x-fragment" id="fragmentshader">
+  precision mediump float;
+
+  varying vec4 vColor;
+
+  void main() {
+    gl_FragColor = vColor;
+  }
+</script>
+</head>
+<body onload="app.start()">
+
+<h1>Graphical Visualisation Technologies - EA6: <br> Objekte bewegen</h1>
+
+<div class="bereich">
+  <div class="flex">
+
+    <div class="szene">
+      <canvas id="canvas" width="500" height="500"></canvas>
+
+      <div id="webgl-error" class="notice" hidden></div>
+
+      <div class="gruppe" style="margin-top:12px; white-space:nowrap;">
+        <span class="label">Animation:</span>
+        <button id="btnAnimation" class="knopf" onclick="app.toggleAnimation()">Pause</button>
+        <button id="btnSchritt" class="knopf" onclick="app.schritt(1)">Schritt (K)</button>
+      </div>
+
+      <div class="gruppe" style="white-space:nowrap;">
+        <span class="label">Ansicht:</span>
+        <button class="knopf" onclick="app.drehen(-1)">&#8592; drehen</button>
+        <button class="knopf" onclick="app.drehen(1)">drehen &#8594;</button>
+        <button class="knopf" onclick="app.hoehe(1)">Höhe +</button>
+        <button class="knopf" onclick="app.hoehe(-1)">Höhe -</button>
+        <button class="knopf" onclick="app.zoom(-1)">näher</button>
+        <button class="knopf" onclick="app.zoom(1)">weiter</button>
+        <button class="knopf" onclick="app.resetView()">zurücksetzen</button>
+      </div>
+
+      <p class="klein">Tipp: <b>K</b> bewegt alle Kugeln ein Stück weiter (<b>Shift + K</b> zurück),
+      <b>A</b> startet oder pausiert die Animation. Mit den Pfeiltasten lässt sich die Kamera
+      um die Szene drehen und in der Höhe verändern, <b>N</b> / <b>Shift + N</b> ändern den
+      Abstand und <b>R</b> setzt die Kamera zurück.</p>
+    </div>
+
+    <div id="info"></div>
+
+  </div>
+</div>
+
+<footer>
+    <p>Erstellt von Fabian Meintzer in Brandenburg an der Havel</p>
+</footer>
+
+</body>
+</html>
